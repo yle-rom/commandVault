@@ -1,64 +1,48 @@
 # Command Vault
 
-A local search engine for commands you actually use — Arch Linux, Neovim, Git, and anything else you add. Accessible as a web app and a CLI tool.
+A personal search engine for commands — Arch Linux, Neovim, Git, and more.
+
+🌐 **[vault.romanoskotsis.com](https://vault.romanoskotsis.com)**
 
 ---
 
-## Project Structure
+## Features
 
-```
-~/Coding/commandVault/
-├── backend/
-│   └── src/
-│       ├── server.ts        # Express server, serves /api/commands on port 3001
-│       ├── cli.ts           # CLI tool source
-│       ├── types.ts         # TypeScript interfaces (Command, UsefulCommand, CommandsData)
-│       └── data/
-│           └── commands.json  # The database — all commands live here
-└── frontend/
-    └── src/
-        ├── App.tsx          # Main React component, search + command cards
-        ├── main.tsx         # Entry point, mounts App into the DOM
-        └── index.css        # Tailwind import
-```
-
----
-
-## Running the App
-
-**Backend** — port 3001
-```bash
-cd ~/Coding/commanVault/backend
-npx tsx src/server.ts
-```
-
-**Frontend** — port 5173
-```bash
-cd ~/Coding/commanVault/frontend
-npm run dev
-```
-
-Then open `http://localhost:5173` in your browser. Both must be running at the same time.
+- Live search across commands, descriptions, and tags
+- One-click copy to clipboard
+- CLI tool for searching directly from your terminal
 
 ---
 
 ## CLI
 
-The `vault` command is installed globally at `/usr/local/bin/vault`. Also added npm to PATH (.zshrc -> export PATH=...)
-
 ```bash
+vault -s <query>     # search commands
 vault list           # list all commands
-vault -s <query>     # search by name, description, or tag
-vault --help         # show all options
+vault --help         # show options
 ```
 
-The CLI reads directly from `commands.json` — no need to run the backend server.
+### Setup
+
+```bash
+git clone https://github.com/yle-rom/commandVault.git
+cd commandVault/backend
+npm install
+npm install -g tsx
+
+sudo tee /usr/local/bin/vault > /dev/null <<'EOF'
+#!/bin/bash
+tsx /path/to/commandVault/backend/src/cli.ts "$@"
+EOF
+
+sudo chmod +x /usr/local/bin/vault
+```
 
 ---
 
 ## Adding Commands
 
-Open `backend/src/data/commands.json` and follow this structure:
+Edit `backend/src/data/commands.json`:
 
 ```json
 {
@@ -67,7 +51,7 @@ Open `backend/src/data/commands.json` and follow this structure:
   "category": "category",
   "description": "what it does",
   "usefulCommands": [
-    { "cmd": "actual command", "note": "what it does" }
+    { "cmd": "example command", "note": "what it does" }
   ],
   "tags": ["tag1", "tag2"]
 }
@@ -77,10 +61,9 @@ Open `backend/src/data/commands.json` and follow this structure:
 
 ## Tech Stack
 
-| Layer    | Tech                        |
-|----------|-----------------------------|
-| Frontend | React + Vite + TypeScript   |
+| Layer    | Tech                           |
+|----------|--------------------------------|
+| Frontend | React + Vite + TypeScript      |
 | Backend  | Node.js + Express + TypeScript |
-| Database | commands.json (local file)  |
-| Styling  | Tailwind CSS                |
-| CLI      | Commander.js + tsx          |
+| Styling  | Tailwind CSS                   |
+| CLI      | Commander.js + tsx             |
