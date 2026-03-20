@@ -7,7 +7,7 @@ function App() {
   const [copied, setCopied] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('http://localhost:3001/api/commands')
+    fetch('/api/commands')
       .then(res => res.json())
       .then(data => setCommands(data.commands))
   }, [])
