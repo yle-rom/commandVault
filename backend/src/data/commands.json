@@ -1,0 +1,203 @@
+{
+  "commands": [
+    {
+      "id": "ls",
+      "name": "ls",
+      "category": "filesystem",
+      "description": "List directory contents. Shows files and directories in the current or specified directory.",
+      "usefulCommands": [
+        { "cmd": "ls -la", "note": "long format, show hidden files" },
+        { "cmd": "ls -lh", "note": "human readable file sizes" },
+        { "cmd": "ls -lt", "note": "sort by modification time" },
+        { "cmd": "ls -R", "note": "list recursively" }
+      ],
+      "tags": ["filesystem", "navigation"]
+    },
+    {
+      "id": "find",
+      "name": "find",
+      "category": "filesystem",
+      "description": "Search for files and directories in a directory hierarchy.",
+      "usefulCommands": [
+        { "cmd": "find . -name '*.ts'", "note": "find all TypeScript files" },
+        { "cmd": "find . -type d", "note": "find directories only" },
+        { "cmd": "find . -mtime -7", "note": "files modified in last 7 days" },
+        { "cmd": "find . -size +100M", "note": "files larger than 100MB" }
+      ],
+      "tags": ["filesystem", "search"]
+    },
+    {
+      "id": "du",
+      "name": "du",
+      "category": "filesystem",
+      "description": "Estimate file and directory space usage.",
+      "usefulCommands": [
+        { "cmd": "du -sh *", "note": "size of each item in current directory" },
+        { "cmd": "du -sh .", "note": "total size of current directory" },
+        { "cmd": "du -h --max-depth=1", "note": "one level deep with human readable sizes" }
+      ],
+      "tags": ["filesystem", "disk"]
+    },
+    {
+      "id": "git-commit",
+      "name": "git commit",
+      "category": "git",
+      "description": "Record staged changes to the repository with a message describing what changed.",
+      "usefulCommands": [
+        { "cmd": "git commit -m \"message\"", "note": "commit with inline message" },
+        { "cmd": "git commit --amend", "note": "modify the last commit" },
+        { "cmd": "git commit -a -m \"message\"", "note": "stage all tracked files and commit" }
+      ],
+      "tags": ["git", "version-control"]
+    },
+    {
+      "id": "git-log",
+      "name": "git log",
+      "category": "git",
+      "description": "Show commit history for the repository.",
+      "usefulCommands": [
+        { "cmd": "git log --oneline", "note": "compact one line per commit" },
+        { "cmd": "git log --oneline --graph", "note": "visual branch graph" },
+        { "cmd": "git log -p", "note": "show diff for each commit" },
+        { "cmd": "git log --author=\"name\"", "note": "filter by author" }
+      ],
+      "tags": ["git", "version-control", "history"]
+    },
+    {
+      "id": "git-stash",
+      "name": "git stash",
+      "category": "git",
+      "description": "Temporarily shelve changes so you can switch context without committing.",
+      "usefulCommands": [
+        { "cmd": "git stash", "note": "stash current changes" },
+        { "cmd": "git stash pop", "note": "apply last stash and remove it" },
+        { "cmd": "git stash list", "note": "list all stashes" },
+        { "cmd": "git stash drop", "note": "delete last stash without applying" }
+      ],
+      "tags": ["git", "version-control"]
+    },
+    {
+      "id": "git-reset",
+      "name": "git reset",
+      "category": "git",
+      "description": "Undo commits or unstage files. Use with caution on shared branches.",
+      "usefulCommands": [
+        { "cmd": "git reset HEAD~1", "note": "undo last commit, keep changes staged" },
+        { "cmd": "git reset --hard HEAD~1", "note": "undo last commit, discard changes" },
+        { "cmd": "git reset HEAD file.txt", "note": "unstage a specific file" }
+      ],
+      "tags": ["git", "version-control", "undo"]
+    },
+    {
+      "id": "pacman",
+      "name": "pacman",
+      "category": "arch",
+      "description": "Arch Linux package manager. Install, remove, and update system packages.",
+      "usefulCommands": [
+        { "cmd": "sudo pacman -S package", "note": "install a package" },
+        { "cmd": "sudo pacman -Syu", "note": "full system upgrade" },
+        { "cmd": "sudo pacman -R package", "note": "remove a package" },
+        { "cmd": "sudo pacman -Rs package", "note": "remove package and unused dependencies" },
+        { "cmd": "pacman -Ss keyword", "note": "search for a package" },
+        { "cmd": "pacman -Q", "note": "list all installed packages" }
+      ],
+      "tags": ["arch", "packages", "system"]
+    },
+    {
+      "id": "systemctl",
+      "name": "systemctl",
+      "category": "arch",
+      "description": "Control systemd services. Start, stop, enable, and check status of system services.",
+      "usefulCommands": [
+        { "cmd": "systemctl start service", "note": "start a service" },
+        { "cmd": "systemctl stop service", "note": "stop a service" },
+        { "cmd": "systemctl enable service", "note": "start service on boot" },
+        { "cmd": "systemctl status service", "note": "check service status" },
+        { "cmd": "systemctl restart service", "note": "restart a service" },
+        { "cmd": "journalctl -u service -f", "note": "follow service logs live" }
+      ],
+      "tags": ["arch", "system", "services"]
+    },
+    {
+      "id": "nvim",
+      "name": "nvim",
+      "category": "editor",
+      "description": "Hyperextensible Vim-based text editor. Modal editing, highly configurable.",
+      "usefulCommands": [
+        { "cmd": "nvim .", "note": "open in current directory" },
+        { "cmd": "nvim file.ts", "note": "open specific file" },
+        { "cmd": "nvim +42 file.ts", "note": "open file at line 42" },
+        { "cmd": ":Lazy sync", "note": "install/update plugins" },
+        { "cmd": ":Mason", "note": "manage LSP servers" },
+        { "cmd": ":checkhealth", "note": "diagnose config issues" }
+      ],
+      "tags": ["editor", "terminal", "neovim"]
+    },
+    {
+      "id": "ssh",
+      "name": "ssh",
+      "category": "network",
+      "description": "Secure Shell. Connect to remote machines and execute commands over encrypted connection.",
+      "usefulCommands": [
+        { "cmd": "ssh user@host", "note": "connect to remote machine" },
+        { "cmd": "ssh -p 2222 user@host", "note": "connect on custom port" },
+        { "cmd": "ssh -i ~/.ssh/key user@host", "note": "connect with specific key" },
+        { "cmd": "ssh-keygen -t ed25519", "note": "generate new SSH key pair" },
+        { "cmd": "ssh-copy-id user@host", "note": "copy public key to remote machine" }
+      ],
+      "tags": ["network", "remote", "security"]
+    },
+    {
+      "id": "curl",
+      "name": "curl",
+      "category": "network",
+      "description": "Transfer data to or from a server using various protocols. Essential for testing APIs.",
+      "usefulCommands": [
+        { "cmd": "curl https://example.com", "note": "basic GET request" },
+        { "cmd": "curl -X POST -H 'Content-Type: application/json' -d '{\"key\":\"value\"}' url", "note": "POST JSON data" },
+        { "cmd": "curl -o file.zip url", "note": "download file" },
+        { "cmd": "curl -I url", "note": "show response headers only" }
+      ],
+      "tags": ["network", "api", "http"]
+    },
+    {
+      "id": "ps",
+      "name": "ps",
+      "category": "process",
+      "description": "Report a snapshot of current running processes.",
+      "usefulCommands": [
+        { "cmd": "ps aux", "note": "show all running processes" },
+        { "cmd": "ps aux | grep node", "note": "find node processes" },
+        { "cmd": "ps -p PID", "note": "info about specific process" }
+      ],
+      "tags": ["process", "system"]
+    },
+    {
+      "id": "kill",
+      "name": "kill",
+      "category": "process",
+      "description": "Send signals to processes. Most commonly used to terminate stuck or unwanted processes.",
+      "usefulCommands": [
+        { "cmd": "kill PID", "note": "gracefully stop a process" },
+        { "cmd": "kill -9 PID", "note": "force kill a process" },
+        { "cmd": "pkill -f name", "note": "kill process by name" },
+        { "cmd": "killall node", "note": "kill all node processes" }
+      ],
+      "tags": ["process", "system"]
+    },
+    {
+      "id": "grep",
+      "name": "grep",
+      "category": "filesystem",
+      "description": "Search text using patterns. One of the most used command line tools.",
+      "usefulCommands": [
+        { "cmd": "grep -r 'pattern' .", "note": "search recursively in current directory" },
+        { "cmd": "grep -i 'pattern' file", "note": "case insensitive search" },
+        { "cmd": "grep -n 'pattern' file", "note": "show line numbers" },
+        { "cmd": "grep -v 'pattern' file", "note": "show lines that don't match" },
+        { "cmd": "grep -l 'pattern' *", "note": "show only filenames with matches" }
+      ],
+      "tags": ["filesystem", "search", "text"]
+    }
+  ]
+}

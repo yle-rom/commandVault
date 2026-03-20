@@ -1,0 +1,37 @@
+. The Application: "The Command Vault"
+
+What it does: It is a local, decoupled web application acting as your personal search engine for Arch Linux, Neovim, and programming commands.
+
+    The Problem it Solves: Prevents you from constantly Googling complex commands (like mkinitcpio or Git workflows) by storing them locally.
+
+    Key Features: A sleek React user interface with a live search bar. As you type, it filters a grid of "Command Cards" and includes a one-click "Copy to Clipboard" button for instant terminal use.
+
+2. The Tech Stack
+
+We specifically chose this stack to bridge your existing Java Object-Oriented Programming degree with the modern JavaScript ecosystem.
+
+    Frontend: React built with Vite (Lightning-fast UI rendering).
+
+    Backend: Node.js with Express.js (A lightweight server to handle API requests).
+
+    Language: TypeScript across the entire stack (Adds Java-like strict rules, interfaces, and type safety to JavaScript).
+
+    Database: A local commands.json file (Keeps the architecture simple by skipping SQL for now, relying on Node's native file system reading).
+
+3. The IDE: Neovim (Kickstart)
+
+We transformed your terminal-based Neovim from a basic text editor into a fully integrated Web Development IDE.
+
+    Language Servers (Mason): Installed ts_ls, html, cssls, eslint, and prettier. This gives Neovim the "brain" to understand your TypeScript code, provide auto-complete, and instantly flag errors just like Eclipse or IntelliJ.
+
+    Syntax Highlighting (Treesitter): Compiled parsers for javascript, typescript, tsx, html, and css so your code is flawlessly color-coded for readability.
+
+4. What We Actually Built Today
+
+We completely scaffolded the decoupled project architecture inside ~/command-vault:
+
+    Generated the frontend/ directory, complete with React boilerplate and strict tsconfig.json rules.
+
+    Generated the backend/ directory, initializing a Node environment (package.json).
+
+    Installed the core backend engines: express (the server), cors (the security middleware that allows React to talk to Node), and tsx (the compiler that runs TypeScript natively in the terminal).
