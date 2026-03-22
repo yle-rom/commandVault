@@ -1,5 +1,5 @@
 import { Command as CLI } from 'commander'
-import { readFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import path from 'path'
 import type { CommandsData } from './types'
 
@@ -44,6 +44,49 @@ program
 		data.commands.forEach(cmd => {
 			console.log(`${cmd.name} - ${cmd.category}`)
 		})
+	})
+program
+	.command('add')
+	.description('add a new command')
+	.action(async () => {
+		const rl = (await import('readline')).createInterface({
+			input: process.stdin,
+			output: process.stdout
+		})
+
+		const ask = (question: string): Promise<string> =>
+			new Promise(resolve => rl.question(question, resolve))
+
+		const name = await ask('Name: ')
+		const description = await ask('Description: ')
+
+		const usefulCommands: { cmd: string; note: string }[] = []
+		let adding = true
+
+		while (adding) {
+			const cmd = await ask('Command (or press enter to finish): ')
+			if (!cmd) {
+				adding = false
+			} else {
+				const note = await ask('Note for this command: ')
+				usefulCommands.push({ cmd, note })
+			}
+		}
+
+		rl.close()
+
+		const newCommand = {
+			id: Date.now().toString(),
+			name,
+			description,
+			category: 'general',
+			tags: [],
+			usefulCommands
+		}
+
+		data.commands.push(newCommand)
+		writeFileSync(filePath, JSON.stringify(data, null, 2))
+		console.log(`\n✓ Added "${name}" to vault`)
 	})
 
 program.parse(process.argv)
